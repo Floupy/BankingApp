@@ -42,10 +42,45 @@ namespace BankingApplication
 
         public void AddToBalance(decimal amount, DateTime date, string note)
         {
+            if(amount < 0)
+            {
+                //throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be possitive");
+                Console.WriteLine("Can not add, amount must be positive!");
+                return;
+            }
+
             transactions.Add(new Transaction(amount, date, note));
         }
+        public void TakeFromBalance(decimal amount, DateTime date, string note)
+        {
+            if (amount < 0)
+            {
+                //throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be possitive");
+                Console.WriteLine("Can not withdraw, amount must be positive!");
+                return;
+            }
 
-        
+            if(this.Balance - amount < 0)
+            {
+                Console.WriteLine("Can not withdraw, not sufficient funds!");
+                return;
+            }
+
+            transactions.Add(new Transaction(-amount, date, note));
+        }
+
+        public void PrintTransactions()
+        {
+            Console.WriteLine($"A printout for  {this.Number} {this.Owner}");
+            Console.WriteLine("----------------------------------------------------");
+            foreach (var t in transactions)
+            {
+                Console.WriteLine($" {t.Date} : {t.Amount} {Currency}");
+            }
+            Console.WriteLine("----------------------------------------------------");
+            Console.WriteLine($"Balance: {this.Balance} {this.Currency}");
+            Console.WriteLine("----------------------------------------------------");
+        }
 
     }
 }

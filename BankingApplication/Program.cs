@@ -21,10 +21,14 @@ namespace BankingApplication
             accounts[0].AddToBalance(1000000, new DateTime(2015, 12, 31, 5, 10, 20), "Donations");
             accounts[0].AddToBalance(2000, DateTime.Now, "Lecture");
 
+            accounts[1].TakeFromBalance(5000000, DateTime.Now, "Shopping");
+            accounts[1].TakeFromBalance(2000000, DateTime.Now, "New car");
+            accounts[1].TakeFromBalance(5000000, DateTime.Now, " More shopping");
+
 
             foreach (var account in accounts)
             {
-                account.Print();
+                account.PrintTransactions();
             }
 
             
